@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk URL Opener</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        textarea {
+            width: 80%;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Open Multiple URLs in Bulk</h1>
+    <form id="bulkUrlForm">
+        <textarea id="urlInput" placeholder="Paste URLs here, one per line"></textarea><br>
+        <button type="button" onclick="openUrls()">Open URLs</button>
+    </form>
+
+    <script>
+        function openUrls() {
+            const urls = document.getElementById('urlInput').value.trim().split('\n');
+            urls.forEach(url => {
+                const trimmedUrl = url.trim();
+                if (trimmedUrl.startsWith('http://') || trimmedUrl.startsWith('https://')) {
+                    window.open(trimmedUrl, '_blank');
+                } else {
+                    alert(`Invalid URL: ${trimmedUrl}`);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
