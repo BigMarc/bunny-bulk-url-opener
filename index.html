@@ -19,6 +19,7 @@
         }
         button {
             padding: 10px 20px;
+            margin: 5px;
         }
     </style>
 </head>
@@ -27,6 +28,7 @@
     <form id="bulkUrlForm">
         <textarea id="urlInput" placeholder="Paste URLs here, one per line"></textarea><br>
         <button type="button" onclick="openUrls()">Open URLs</button>
+        <button type="button" onclick="clearField()">Clear Field</button>
     </form>
 
     <script>
@@ -41,6 +43,11 @@
                 }
             });
         }
+
+        function clearField() {
+            document.getElementById('urlInput').value = ''; // Clear the textarea
+        }
     </script>
 </body>
 </html>
+
