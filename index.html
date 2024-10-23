@@ -36,8 +36,8 @@
             urls.forEach(url => {
                 let trimmedUrl = url.trim();
 
-                // Automatically add https:// for domains like amateur9.com if not present
-                if (trimmedUrl.includes('amateur9.com') && !trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
+                // Automatically add https:// if the URL does not start with http:// or https://
+                if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
                     trimmedUrl = 'https://' + trimmedUrl;
                 }
 
@@ -55,3 +55,4 @@
     </script>
 </body>
 </html>
+
