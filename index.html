@@ -36,16 +36,23 @@
             urls.forEach(url => {
                 let trimmedUrl = url.trim();
 
-                // Skip completely blank lines
-                if (trimmedUrl === '') return;
-
-                // Add https:// if missing
+                // Automatically add https:// if the URL does not start with http:// or https://
                 if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
                     trimmedUrl = 'https://' + trimmedUrl;
                 }
 
-                // Open the URL in a new tab
-                window.open(trimmedUrl, '_blank');
+                if (trimmedUrl.startsWith('http://') || trimmedUrl.startsWith('https://')) {
+                    window.open(trimmedUrl, '_blank');
+                } else {
+                    alert(`Invalid URL: ${trimmedUrl}`);
+                }
             });
+        }
 
+        function clearField() {
+            document.getElementById('urlInput').value = ''; // Clear the textarea
+        }
+    </script>
+</body>
+</html>
 
