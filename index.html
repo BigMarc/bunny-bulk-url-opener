@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulk URL Opener</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -33,26 +33,35 @@
     <script>
         function openUrls() {
             const urls = document.getElementById('urlInput').value.trim().split('\n');
-            urls.forEach(url => {
-                let trimmedUrl = url.trim();
+            let opened = 0;
 
-                // Automatically add https:// if the URL does not start with http:// or https://
+            urls.forEach((url, index) => {
+                let trimmedUrl = url.trim();
+                
+                if (!trimmedUrl) return; // Ignoriere leere Zeilen
+
                 if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
                     trimmedUrl = 'https://' + trimmedUrl;
                 }
 
-                if (trimmedUrl.startsWith('http://') || trimmedUrl.startsWith('https://')) {
-                    window.open(trimmedUrl, '_blank');
+                if (trimmedUrl.match(/^(https?:\/\/)[\w.-]+(\.[\w.-]+)+([/?].*)?$/)) {
+                    setTimeout(() => {
+                        window.open(trimmedUrl, '_blank');
+                    }, index * 500); // Verzögerung von 500ms pro URL, um Blockierungen zu reduzieren
+                    opened++;
                 } else {
                     alert(`Invalid URL: ${trimmedUrl}`);
                 }
             });
+
+            if (opened === 0) {
+                alert("No valid URLs found!");
+            }
         }
 
         function clearField() {
-            document.getElementById('urlInput').value = ''; // Clear the textarea
+            document.getElementById('urlInput').value = '';
         }
     </script>
 </body>
 </html>
-
